@@ -1,0 +1,40 @@
+{
+    "scripts": {
+        "dev": "dotenv -e .env.development -c development nodemon --watch src -e ts,tsx --exec ts-node src/index.ts",
+        "pre": "dotenv -e .env.development -c development node ./dist/index.js",
+        "start": "dotenv -e .env.production -c production node ./dist/index.js",
+        "clean": "rimraf dist",
+        "build": "pnpm clean && ncc build ./src/index.ts -o ./dist -m"
+    },
+    "dependencies": {
+        "axios": "^1.7.7",
+        "dotenv": "^16.4.5",
+        "dotenv-cli": "^7.4.2",
+        "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
+        "koa": "^2.15.3",
+        "koa-bodyparser": "^4.4.1",
+        "koa-router": "^13.0.1",
+        "log4js": "^6.9.1",
+        "module-alias": "^2.2.3"
+    },
+    "devDependencies": {
+        "@types/jsonwebtoken": "^9.0.6",
+        "@types/koa": "^2.15.0",
+        "@types/koa-bodyparser": "^4.3.12",
+        "@types/koa-router": "^7.4.8",
+        "@typescript-eslint/eslint-plugin": "^8.5.0",
+        "@typescript-eslint/parser": "^8.5.0",
+        "eslint": "^9.10.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "nodemon": "^3.1.4",
+        "prettier": "^3.0.0",
+        "rimraf": "^6.0.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.2"
+    },
+    "_moduleAliases": {
+        "@": "src"
+    }
+}
