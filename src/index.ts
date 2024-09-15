@@ -1,6 +1,5 @@
 import "./types";
 import "dotenv/config";
-import "module-alias/register";
 import Koa from "koa";
 import { useBodyParser } from "./plugin/bodyParser";
 import { useRouter } from "./router";

@@ -1,9 +1,9 @@
 import Joi from "joi";
-import { router } from "@/router/index";
-import { verifyRequest } from "@/public/validator";
-import { verifyToken, encodeToken } from "@/public/jwt";
-import { ISchema } from "@/public/validator/types";
-import { createAppError } from "@/public/error/modules/appError";
+import { router } from "../../router/index";
+import { verifyRequest } from "../../public/validator";
+import { verifyToken, encodeToken } from "../../public/jwt";
+import { ISchema } from "../../public/validator/types";
+import { createAppError } from "../../public/error/modules/appError";
 
 function defaultUserSaltGet() {
     interface RequestUserSaltGet {
