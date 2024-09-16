@@ -67,7 +67,7 @@ async function isDirectory(reqPath: string): Promise<boolean> {
 
 async function getFileContent(reqPath: string): Promise<string> {
     try {
-        const content = await fs.promises.readFile(reqPath, "binary");
+        const content = await fs.promises.readFile(reqPath, "utf-8");
         return content;
     } catch (error) {
         throw createAppError("File not found");
