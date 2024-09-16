@@ -24,51 +24,47 @@ export async function saveFiles(files: File | File[]) {
     }
 }
 
-export async function saveFile(files: File | File[], path?: string) {
-    if (Array.isArray(files)) {
-        throw createAppError("save file array not supported");
-    }
-    if (!veifyFilePath(path)) {
-        throw createAppError("invalid file path");
-    }
+export async function saveFile(files: File, path?: string) {
+    veifyFilePath(path);
+
     const f = files as File;
     const { filepath: oldPath } = f;
     const p = path || oldPath;
     const newPath = getNewPath(p);
+
     if (await fs.promises.stat(newPath).catch(() => false)) {
         if (newPath !== oldPath) {
             throw createAppError(`file ${p} already exists, please choose another name`);
         }
         return;
     }
-    if (!(await veifyFileFolder(newPath))) {
-        throw createAppError("invalid file folder");
-    }
+
+    await veifyFolderPath(getFileFolder(newPath));
     await fs.promises.rename(oldPath, newPath);
 }
 
-function veifyFilePath(path?: string) {
-    if (!path) {
-        return false;
-    }
-    const regex = /^(?!.*\.\.)[^./][\w./-]*[^./]\.[a-zA-Z0-9]+$/;
-    if (!regex.test(path)) {
-        return false;
+export async function veifyFolderPath(path: string) {
+    const exists = await fs.promises.stat(path).catch(() => false);
+    if (!exists) {
+        await fs.promises.mkdir(path, { recursive: true });
     }
     return true;
 }
 
-async function veifyFileFolder(path: string) {
-    const folder = getFileFolder(path);
-    const exists = await fs.promises.stat(folder).catch(() => false);
-    if (!exists) {
-        await fs.promises.mkdir(folder, { recursive: true });
+export function addRootToPath(path: string) {
+    return ROOT_PATH + "/" + path;
+}
+
+function veifyFilePath(path?: string) {
+    const regex = /^(?!.*\.\.)[^./][\w./-]*[^./]\.[a-zA-Z0-9]+$/;
+    if (path && regex.test(path)) {
+        return true;
     }
-    return true;
+    throw createAppError("invalid file path");
 }
 
 function getNewPath(path: string) {
-    return ROOT_PATH + "/" + getEnv(EnvEnum.STATIC_FOLDER) + "/" + path;
+    return addRootToPath(getEnv(EnvEnum.STATIC_FOLDER) + "/" + path);
 }
 
 function getFileFolder(path: string) {

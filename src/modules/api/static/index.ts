@@ -91,6 +91,9 @@ function defaultStaticUpload() {
                 throw createAppError("No file uploaded");
             }
             const path = ctx.state.validatedData.path;
+            if (Array.isArray(ctx.request.files.files)) {
+                throw createAppError("Only one file can be uploaded");
+            }
             await saveFile(ctx.request.files.files, path);
             ctx.body = createSuccessResponse();
             await next();
