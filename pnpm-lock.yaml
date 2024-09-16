@@ -32,9 +32,9 @@ importers:
       koa-router:
         specifier: ^13.0.1
         version: 13.0.1
-      koa-static:
-        specifier: ^5.0.0
-        version: 5.0.0
+      koa-static-server:
+        specifier: ^1.5.2
+        version: 1.5.2
       log4js:
         specifier: ^6.9.1
         version: 6.9.1
@@ -51,9 +51,9 @@ importers:
       '@types/koa-router':
         specifier: ^7.4.8
         version: 7.4.8
-      '@types/koa-static':
-        specifier: ^4.0.4
-        version: 4.0.4
+      '@types/koa-static-server':
+        specifier: ^1.5.3
+        version: 1.5.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.5.0
         version: 8.5.0(@typescript-eslint/parser@8.5.0(eslint@9.10.0)(typescript@5.6.2))(eslint@9.10.0)(typescript@5.6.2)
@@ -235,11 +235,8 @@ packages:
   '@types/koa-router@7.4.8':
     resolution: {integrity: sha512-SkWlv4F9f+l3WqYNQHnWjYnyTxYthqt8W9az2RTdQW7Ay8bc00iRZcrb8MC75iEfPqnGcg2csEl8tTG1NQPD4A==}
 
-  '@types/koa-send@4.1.6':
-    resolution: {integrity: sha512-vgnNGoOJkx7FrF0Jl6rbK1f8bBecqAchKpXtKuXzqIEdXTDO6dsSTjr+eZ5m7ltSjH4K/E7auNJEQCAd0McUPA==}
-
-  '@types/koa-static@4.0.4':
-    resolution: {integrity: sha512-j1AUzzl7eJYEk9g01hNTlhmipFh8RFbOQmaMNLvLcNNAkPw0bdTs3XTa3V045XFlrWN0QYnblbDJv2RzawTn6A==}
+  '@types/koa-static-server@1.5.3':
+    resolution: {integrity: sha512-KWLgrn9IuXzfanT8KkhpsJDbReFsSdCd/sEwlcSl0fO3YmSd2d6acT2SVTg69W04EDfw5xGHy2FTpDy2nItEzA==}
 
   '@types/koa@2.15.0':
     resolution: {integrity: sha512-7QFsywoE5URbuVnG3loe03QXuGajrnotr3gQkXcEBShORai23MePfFYdhz90FEtBBpkyIYQbVD+evKtloCgX3g==}
@@ -463,14 +460,6 @@ packages:
   date-format@4.0.14:
     resolution: {integrity: sha512-39BOQLs9ZjKh0/patS9nrT8wc3ioX3/eA/zgbKNopnF2wCqJEoxywwwElATYvRsXdnOxA/OQeQoFZ3rFjVajhg==}
     engines: {node: '>=4.0'}
-
-  debug@3.2.7:
-    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
 
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
@@ -885,9 +874,8 @@ packages:
     resolution: {integrity: sha512-tmcyQ/wXXuxpDxyNXv5yNNkdAMdFRqwtegBXUaowiQzUKqJehttS0x2j0eOZDQAyloAth5w6wwBImnFzkUz3pQ==}
     engines: {node: '>= 8'}
 
-  koa-static@5.0.0:
-    resolution: {integrity: sha512-UqyYyH5YEXaJrf9S8E23GoJFQZXkBVJ9zYYMPGz919MSX1KuvAcycIuS0ci150HCoPf4XQVhQ84Qf8xRPWxFaQ==}
-    engines: {node: '>= 7.6.0'}
+  koa-static-server@1.5.2:
+    resolution: {integrity: sha512-qIlok7DB85k9ST0cBBdzrYD9j3JwfGJx9D3znDRzdYUwlxix5+czgPlyXy5zW077WRrRzQy0ykx1U6cbaEOPtA==}
 
   koa@2.15.3:
     resolution: {integrity: sha512-j/8tY9j5t+GVMLeioLaxweJiKUayFhlGqNTzf2ZGwL0ZCQijd2RLHK0SLW5Tsko8YyyqCZC2cojIb0/s62qTAg==}
@@ -1266,6 +1254,10 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
+  upath@1.2.0:
+    resolution: {integrity: sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==}
+    engines: {node: '>=4'}
+
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -1469,14 +1461,9 @@ snapshots:
     dependencies:
       '@types/koa': 2.15.0
 
-  '@types/koa-send@4.1.6':
+  '@types/koa-static-server@1.5.3':
     dependencies:
       '@types/koa': 2.15.0
-
-  '@types/koa-static@4.0.4':
-    dependencies:
-      '@types/koa': 2.15.0
-      '@types/koa-send': 4.1.6
 
   '@types/koa@2.15.0':
     dependencies:
@@ -1739,10 +1726,6 @@ snapshots:
       which: 2.0.2
 
   date-format@4.0.14: {}
-
-  debug@3.2.7:
-    dependencies:
-      ms: 2.1.3
 
   debug@4.3.7(supports-color@5.5.0):
     dependencies:
@@ -2165,10 +2148,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  koa-static@5.0.0:
+  koa-static-server@1.5.2:
     dependencies:
-      debug: 3.2.7
       koa-send: 5.0.1
+      upath: 1.2.0
     transitivePeerDependencies:
       - supports-color
 
@@ -2529,6 +2512,8 @@ snapshots:
   universalify@0.1.2: {}
 
   unpipe@1.0.0: {}
+
+  upath@1.2.0: {}
 
   uri-js@4.4.1:
     dependencies:

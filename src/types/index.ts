@@ -32,4 +32,6 @@ interface MyCustomProcessEnv {
     ADMIN_USER_SALT?: string;
     /** 静态文件目录 */
     STATIC_FOLDER: string;
+    /** 静态文件路径 */
+    STATIC_PATH: string;
 }
