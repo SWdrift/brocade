@@ -1,7 +1,9 @@
-import { useGlobal } from "./global";
-import { useUser } from "./user";
+import { defaultGlobal } from "./global";
+import { defaultUser } from "./user";
+import { defaultStatic } from "./static";
 
 export function useModules(app: Application) {
-    useGlobal();
-    useUser();
+    defaultGlobal();
+    defaultUser();
+    defaultStatic();
 }

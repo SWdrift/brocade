@@ -11,8 +11,8 @@ import { recordAppStart } from "./public/logger/modules/app";
 (async function start() {
     const app = new Koa();
 
-    useBodyParser(app);
     useErrorHandle(app);
+    useBodyParser(app);
     useStatic(app);
     useModules(app);
     useRouter(app);
