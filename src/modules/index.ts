@@ -1,9 +1,5 @@
-import { defaultGlobal } from "./global";
-import { defaultUser } from "./user";
-import { defaultStatic } from "./static";
+import { defaultApi } from "./api";
 
 export function useModules(app: Application) {
-    defaultGlobal();
-    defaultUser();
-    defaultStatic();
+    defaultApi(app);
 }

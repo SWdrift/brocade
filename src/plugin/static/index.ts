@@ -1,8 +1,6 @@
-import serve from "koa-static-server";
+import { getStaticServe } from "./service";
 
 export function useStatic(app: Application) {
-    const rootDir = process.env.STATIC_FOLDER;
-    const rootPath = process.env.STATIC_PATH;
-    const staticServe = serve({ rootDir, rootPath, last: true });
+    const staticServe = getStaticServe();
     app.use(staticServe);
 }

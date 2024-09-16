@@ -1,4 +1,4 @@
-import { apiRouter } from "../../router/index";
+import { apiRouter } from "../../../router/index";
 
 export function defaultGlobal() {
     apiRouter.get("/", (ctx, next) => {
