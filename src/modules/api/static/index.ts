@@ -53,7 +53,7 @@ function defaultStaticUpload() {
                 throw createAppError("No file uploaded");
             }
             const path = ctx.state.validatedData.path;
-            saveFile(ctx.request.files.files, path);
+            await saveFile(ctx.request.files.files, path);
             ctx.body = createSuccessResponse();
             await next();
         }

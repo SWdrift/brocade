@@ -34,14 +34,14 @@ export async function saveFile(files: File | File[], path?: string) {
     const f = files as File;
     const { filepath: oldPath } = f;
     const p = path || oldPath;
-    if (fs.existsSync(p)) {
-        if (p !== oldPath) {
+    const newPath = getNewPath(p);
+    if (await fs.promises.stat(newPath).catch(() => false)) {
+        if (newPath !== oldPath) {
             throw createAppError(`file ${p} already exists, please choose another name`);
         }
         return;
     }
-    const newPath = getNewPath(p);
-    if (!await veifyFileFolder(newPath)) {
+    if (!(await veifyFileFolder(newPath))) {
         throw createAppError("invalid file folder");
     }
     await fs.promises.rename(oldPath, newPath);
