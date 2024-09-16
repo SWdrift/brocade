@@ -12,6 +12,44 @@ import type { ISchema } from "../../../public/validator/types";
 import { createSuccessResponse } from "../../../public/response";
 
 function defaultStaticFile(app: Application) {
+    /**
+     * Request
+     */
+    interface RequestStaticFilePost {
+        /**
+         * 文件列表
+         */
+        files: File[];
+        /**
+         * 文件夹列表
+         */
+        folders: Folder[];
+    }
+    interface File {
+        /**
+         * 文件内容（如果有）
+         */
+        content?: null | string;
+        /**
+         * 文件名
+         */
+        fileName: string;
+        /**
+         * 文件链接
+         */
+        fileUrl: string;
+        [property: string]: any;
+    }
+    interface Folder {
+        /**
+         * 文件夹名称
+         */
+        folderName: string;
+        /**
+         * 文件夹链接
+         */
+        folderUrl: string;
+    }
     const staticServer = getStaticServer();
     const apiPrefix = getEnv(EnvEnum.API_PREFIX);
     const url = `${apiPrefix}/static/file`;
@@ -30,7 +68,7 @@ function defaultStaticFile(app: Application) {
 
     async function generateDirPage(ctx: BodyContext<any>) {
         if (ctx.method === "POST") {
-            return await generateDirJson(ctx.url, url);
+            return (await generateDirJson(ctx.url, url)) as RequestStaticFilePost;
         } else {
             return await generateDirHTML(ctx.url, url);
         }
