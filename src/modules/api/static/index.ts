@@ -1,7 +1,7 @@
 import mount from "koa-mount";
 import { apiRouter } from "../../../router";
 import { getStaticServer } from "./service/staticServer";
-import { generateDirPage } from "./service/dirPage";
+import { generateDirHTML, generateDirJson } from "./service/dirGenerator";
 
 function defaultStaticFile(app: Application) {
     const staticServer = getStaticServer();
@@ -13,10 +13,18 @@ function defaultStaticFile(app: Application) {
 
     async function responseDirPage(ctx: Context<any>, next: Next) {
         if (ctx.path.startsWith(url)) {
-            ctx.body = await generateDirPage(ctx.url, url);
+            ctx.body = await generateDirPage(ctx);
             await next();
         } else {
             await next();
+        }
+    }
+
+    async function generateDirPage(ctx: Context<any>) {
+        if (ctx.method === "POST") {
+            return await generateDirJson(ctx.url, url);
+        } else {
+            return await generateDirHTML(ctx.url, url);
         }
     }
 }

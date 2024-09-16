@@ -1,8 +1,8 @@
 /**
  * @link https://chenshenhai.com/koa2-note/note/static/server.html
  */
-
 import fs from "fs";
+import { createAppError } from "../../../../public/error/modules/appError";
 
 const MIMES: Record<string, string> = {
     css: "text/css",
@@ -32,7 +32,11 @@ const MIMES: Record<string, string> = {
  * @param reqPath 请求资源的绝对路径
  * @return 目录内容列表
  */
-export function getDirContent(reqPath: string) {
+export async function getDirContent(reqPath: string) {
+    if (!await isDirectory(reqPath)) {
+        return getFileContent(reqPath);
+    }
+
     let files = fs.readdirSync(reqPath);
 
     let dirList = [],
@@ -52,4 +56,22 @@ export function getDirContent(reqPath: string) {
     let result = dirList.concat(fileList);
 
     return result;
+}
+
+async function isDirectory(reqPath: string): Promise<boolean> {
+    try {
+        const stats = await fs.promises.lstat(reqPath);
+        return stats.isDirectory();
+    } catch (error) {
+        throw createAppError("Directory not found");
+    }
+}
+
+async function getFileContent(reqPath: string): Promise<string> {
+    try {
+        const content = await fs.promises.readFile(reqPath, "binary");
+        return content;
+    } catch (error) {
+        throw createAppError("File not found");
+    }
 }
