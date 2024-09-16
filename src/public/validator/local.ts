@@ -21,12 +21,17 @@ export function verifyBodyRequest(scheam: ISchema<object>) {
             throw createAppError(`Invalid input: ${JSON.stringify(details)}`, 500);
         }
 
-        ctx.state.validatedData = value;
+        ctx.state.validatedBody = value;
 
         await next();
     };
 }
 
+/**
+ * 验证中间件
+ * @param schema 验证器
+ * @returns 验证中间件
+ */
 export function verifyParamsRequest(scheam: ISchema<object>) {
     return async function (ctx: ParamContext<any>, next: Next) {
         const { error, value } = scheam.validate(ctx.query, {
@@ -42,7 +47,7 @@ export function verifyParamsRequest(scheam: ISchema<object>) {
             throw createAppError(`Invalid input: ${JSON.stringify(details)}`, 500);
         }
 
-        ctx.state.validatedData = value;
+        ctx.state.validatedParam = value;
 
         await next();
     };

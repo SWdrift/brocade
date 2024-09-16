@@ -55,18 +55,18 @@ function defaultStaticFile(app: Application) {
     const url = `${apiPrefix}/static/file`;
 
     app.use(mount(url, staticServer));
-    app.use(responseDirPage);
+    app.use(generateRespnse);
 
-    async function responseDirPage(ctx: BodyContext<any>, next: Next) {
+    async function generateRespnse(ctx: BodyContext<any>, next: Next) {
         if (ctx.path.startsWith(url)) {
-            ctx.body = await generateDirPage(ctx);
+            ctx.body = await generateStaticContent(ctx);
             await next();
         } else {
             await next();
         }
     }
 
-    async function generateDirPage(ctx: BodyContext<any>) {
+    async function generateStaticContent(ctx: BodyContext<any>) {
         if (ctx.method === "POST") {
             return (await generateDirJson(ctx.url, url)) as RequestStaticFilePost;
         } else {
@@ -90,7 +90,7 @@ function defaultStaticUpload() {
             if (!ctx.request.files?.files) {
                 throw createAppError("No file uploaded");
             }
-            const path = ctx.state.validatedData.path;
+            const path = ctx.state.validatedParam.path;
             if (Array.isArray(ctx.request.files.files)) {
                 throw createAppError("Only one file can be uploaded");
             }

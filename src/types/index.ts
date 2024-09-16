@@ -6,9 +6,9 @@ declare global {
 
     type Application = Koa<Koa.DefaultState, Koa.DefaultContext>;
 
-    type BodyContext<T> = Koa.Context & { state: { validatedData: T; token: Token } };
+    type BodyContext<T> = Koa.Context & { state: { validatedBody: T; token: Token } };
 
-    type ParamContext<T> = Koa.Context & { state: { validatedData: T; token: Token } };
+    type ParamContext<T> = Koa.Context & { state: { validatedParam: T; token: Token } };
 
     type Next = Koa.Next;
 }

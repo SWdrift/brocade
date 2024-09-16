@@ -22,7 +22,7 @@ function defaultUserSaltGet() {
         "/user/salt/get",
         verifyBodyRequest(schemaUserSaltGet),
         (ctx: BodyContext<RequestUserSaltGet>) => {
-            const salt = getSalt(ctx.state.validatedData);
+            const salt = getSalt(ctx.state.validatedBody);
             const response: ResponseUserSaltGet = { salt };
             ctx.body = response;
         }
@@ -60,8 +60,8 @@ function defaultUserLogin() {
         "/user/login",
         verifyBodyRequest(schemaUserLogin),
         async (ctx: BodyContext<RequestUserLogin>) => {
-            verifyPassword(ctx.state.validatedData);
-            const { username } = ctx.state.validatedData;
+            verifyPassword(ctx.state.validatedBody);
+            const { username } = ctx.state.validatedBody;
             const token = await encodeToken({ username });
             const response: ResponseUserLogin = { username, token };
             ctx.body = response;
