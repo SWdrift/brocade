@@ -4,6 +4,7 @@ import { verifyBodyRequest } from "../../public/validator";
 import { verifyToken, encodeToken } from "../../public/jwt";
 import { ISchema } from "../../public/validator/types";
 import { createAppError } from "../../public/error/modules/appError";
+import { getEnv, EnvEnum } from "../../public/env";
 
 function defaultUserSaltGet() {
     interface RequestUserSaltGet {
@@ -29,8 +30,8 @@ function defaultUserSaltGet() {
     function getSalt(data: RequestUserSaltGet) {
         const { username } = data;
         if (data.puzzling) {
-            if (username === process.env.ADMIN_USER_NAME) {
-                return process.env.ADMIN_USER_SALT as string;
+            if (username === getEnv(EnvEnum.ADMIN_USER_NAME)) {
+                return getEnv(EnvEnum.ADMIN_USER_SALT) as string;
             }
         }
 
@@ -70,9 +71,9 @@ function defaultUserLogin() {
         const { username, password, puzzling, salt } = data;
         if (puzzling) {
             if (
-                username === process.env.ADMIN_USER_NAME &&
-                password === process.env.ADMIN_USER_PASSWORD &&
-                salt === process.env.ADMIN_USER_SALT
+                username === getEnv(EnvEnum.ADMIN_USER_NAME) &&
+                password === getEnv(EnvEnum.ADMIN_USER_PASSWORD) &&
+                salt === getEnv(EnvEnum.ADMIN_USER_SALT)
             ) {
                 return true;
             }

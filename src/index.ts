@@ -7,6 +7,7 @@ import { useModules } from "./modules";
 import { handleError } from "./public/error";
 import { recordAppStart } from "./public/logger/modules/app";
 import { verifyGlobalRequest } from "./public/validator";
+import { getEnv, EnvEnum } from "./public/env";
 
 (async function start() {
     const app = new Koa();
@@ -17,6 +18,6 @@ import { verifyGlobalRequest } from "./public/validator";
     useModules(app);
     useRouter(app);
 
-    app.listen(process.env.API_PORT);
+    app.listen(getEnv(EnvEnum.API_PORT));
     recordAppStart();
 })();

@@ -2,6 +2,7 @@
  * @link https://chenshenhai.com/koa2-note/note/static/server.html
  */
 import { getDirContent } from "./dirService";
+import { getEnv, EnvEnum } from "../../../../public/env";
 
 /**
  * 生成目录HTML
@@ -65,7 +66,7 @@ export async function generateDirJson(url: string, urlPrefix: string) {
 
 function getReqPath(url: string, urlPrefix: string): string {
     const rootPath = process.cwd();
-    const staticPath = process.env.STATIC_FOLDER;
+    const staticPath = getEnv(EnvEnum.STATIC_FOLDER);
     // 去除 & 后面的内容
     const cleanUrl = url.split("&")[0];
     // 替换 urlPrefix

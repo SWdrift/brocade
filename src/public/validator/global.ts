@@ -1,4 +1,5 @@
 import { createAppError } from "../error/modules/appError";
+import { getEnv, EnvEnum } from "../env";
 import { logger } from "../logger";
 import { CONFIG } from "./config";
 
@@ -7,7 +8,7 @@ import { CONFIG } from "./config";
  */
 export function verifyGlobalRequest(app: Application) {
     app.use(async (ctx: BodyContext<any>, next: Next) => {
-        const apiPrefix = process.env.API_PREFIX;
+        const apiPrefix = getEnv(EnvEnum.API_PREFIX);
         if (!apiPrefix) {
             throw logger.error("API_PREFIX is not defined in environment variables.");
         }

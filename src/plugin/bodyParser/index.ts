@@ -1,4 +1,4 @@
-import bodyParser from "koa-bodyparser";
+import bodyParser from "koa-body";
 
 export function useBodyParser(app: Application) {
     app.use(bodyParser());

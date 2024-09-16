@@ -1,13 +1,15 @@
+import { getEnv, EnvEnum } from "../env";
+
 export const CONFIG = {
     PRIVATE_KEY: (() => {
-        const key = process.env.JWT_PRIVATE_KEY;
+        const key = getEnv(EnvEnum.JWT_PRIVATE_KEY);
         if (typeof key === "undefined") {
             throw new Error("JWT_PRIVATE_KEY is not defined in.env file");
         }
         return key;
     })(),
     PUBLIC_KEY: (() => {
-        const key = process.env.JWT_PUBLIC_KEY;
+        const key = getEnv(EnvEnum.JWT_PUBLIC_KEY);
         if (typeof key === "undefined") {
             throw new Error("JWT_PUBLIC_KEY is not defined in.env file");
         }

@@ -1,6 +1,7 @@
 import Router from "koa-router";
+import { getEnv, EnvEnum } from "../public/env";
 
-export const apiRouter = new Router({ prefix: process.env.API_PREFIX });
+export const apiRouter = new Router({ prefix: getEnv(EnvEnum.API_PREFIX) });
 export const webRouter = new Router();
 
 export function useRouter(app: Application) {
