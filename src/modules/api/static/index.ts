@@ -1,24 +1,25 @@
 import mount from "koa-mount";
 import { apiRouter } from "../../../router";
 import { getStaticServer } from "./service/staticServer";
-import { generateDirContent } from "./service/pathService";
+import { generateDirPage } from "./service/dirPage";
 
 function defaultStaticFile(app: Application) {
     const staticServer = getStaticServer();
     const apiPrefix = process.env.API_PREFIX;
     const url = `${apiPrefix}/static/file`;
+
     app.use(mount(url, staticServer));
-    app.use(async (ctx, next) => {
+    app.use(responseDirPage);
+
+    async function responseDirPage(ctx: Context<any>, next: Next) {
         if (ctx.path.startsWith(url)) {
-            ctx.body = await generateDirContent(ctx.url, url);
+            ctx.body = await generateDirPage(ctx.url, url);
             await next();
         } else {
             await next();
         }
-    });
+    }
 }
-
-function defaultStaticGet() {}
 
 function defaultStaticUpload() {}
 
@@ -28,5 +29,4 @@ function defaultStaticUpdate() {}
 
 export function defaultStatic(app: Application) {
     defaultStaticFile(app);
-    // defaultStaticFilePath();
 }
