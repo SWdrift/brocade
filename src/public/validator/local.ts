@@ -29,7 +29,7 @@ export function verifyBodyRequest(scheam: ISchema<object>) {
 
 export function verifyParamsRequest(scheam: ISchema<object>) {
     return async function (ctx: ParamContext<any>, next: Next) {
-        const { error, value } = scheam.validate(ctx.params, {
+        const { error, value } = scheam.validate(ctx.query, {
             abortEarly: false
         });
 
@@ -42,7 +42,7 @@ export function verifyParamsRequest(scheam: ISchema<object>) {
             throw createAppError(`Invalid input: ${JSON.stringify(details)}`, 500);
         }
 
-        ctx.state.validatedParams = value;
+        ctx.state.validatedData = value;
 
         await next();
     };
