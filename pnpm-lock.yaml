@@ -32,6 +32,9 @@ importers:
       koa-router:
         specifier: ^13.0.1
         version: 13.0.1
+      koa-static:
+        specifier: ^5.0.0
+        version: 5.0.0
       log4js:
         specifier: ^6.9.1
         version: 6.9.1
@@ -48,6 +51,9 @@ importers:
       '@types/koa-router':
         specifier: ^7.4.8
         version: 7.4.8
+      '@types/koa-static':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.5.0
         version: 8.5.0(@typescript-eslint/parser@8.5.0(eslint@9.10.0)(typescript@5.6.2))(eslint@9.10.0)(typescript@5.6.2)
@@ -228,6 +234,12 @@ packages:
 
   '@types/koa-router@7.4.8':
     resolution: {integrity: sha512-SkWlv4F9f+l3WqYNQHnWjYnyTxYthqt8W9az2RTdQW7Ay8bc00iRZcrb8MC75iEfPqnGcg2csEl8tTG1NQPD4A==}
+
+  '@types/koa-send@4.1.6':
+    resolution: {integrity: sha512-vgnNGoOJkx7FrF0Jl6rbK1f8bBecqAchKpXtKuXzqIEdXTDO6dsSTjr+eZ5m7ltSjH4K/E7auNJEQCAd0McUPA==}
+
+  '@types/koa-static@4.0.4':
+    resolution: {integrity: sha512-j1AUzzl7eJYEk9g01hNTlhmipFh8RFbOQmaMNLvLcNNAkPw0bdTs3XTa3V045XFlrWN0QYnblbDJv2RzawTn6A==}
 
   '@types/koa@2.15.0':
     resolution: {integrity: sha512-7QFsywoE5URbuVnG3loe03QXuGajrnotr3gQkXcEBShORai23MePfFYdhz90FEtBBpkyIYQbVD+evKtloCgX3g==}
@@ -451,6 +463,14 @@ packages:
   date-format@4.0.14:
     resolution: {integrity: sha512-39BOQLs9ZjKh0/patS9nrT8wc3ioX3/eA/zgbKNopnF2wCqJEoxywwwElATYvRsXdnOxA/OQeQoFZ3rFjVajhg==}
     engines: {node: '>=4.0'}
+
+  debug@3.2.7:
+    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
 
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
@@ -734,6 +754,10 @@ packages:
     resolution: {integrity: sha512-uPpH7OKX4H25hBmU6G1jWNaqJGpTXxey+YOUizJUAgu0AjLUeC8D73hTrhvDS5D+GJN1DN1+hhc/eF/wpxtp0w==}
     engines: {node: '>= 0.8'}
 
+  http-errors@1.6.3:
+    resolution: {integrity: sha512-lks+lVC8dgGyh97jxvxeYTWQFvh4uw4yC12gVl63Cg30sjPX4wuGcdkICVXDAESr6OJGjqGA8Iz5mkeN6zlD7A==}
+    engines: {node: '>= 0.6'}
+
   http-errors@1.8.1:
     resolution: {integrity: sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==}
     engines: {node: '>= 0.6'}
@@ -764,6 +788,9 @@ packages:
   inflation@2.1.0:
     resolution: {integrity: sha512-t54PPJHG1Pp7VQvxyVCJ9mBbjG3Hqryges9bXoOO6GExCPa+//i/d5GSuFtpx3ALLd7lgIAur6zrIlBQyJuMlQ==}
     engines: {node: '>= 0.8.0'}
+
+  inherits@2.0.3:
+    resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -853,6 +880,14 @@ packages:
   koa-router@13.0.1:
     resolution: {integrity: sha512-4/sijXdSxocIe2wv7RFFSxvo2ic1pDzPSmy11yCGztng1hx408qfw1wVmN3aqhQaU7U6nJ039JKC8ObE73Ohgw==}
     engines: {node: '>= 18'}
+
+  koa-send@5.0.1:
+    resolution: {integrity: sha512-tmcyQ/wXXuxpDxyNXv5yNNkdAMdFRqwtegBXUaowiQzUKqJehttS0x2j0eOZDQAyloAth5w6wwBImnFzkUz3pQ==}
+    engines: {node: '>= 8'}
+
+  koa-static@5.0.0:
+    resolution: {integrity: sha512-UqyYyH5YEXaJrf9S8E23GoJFQZXkBVJ9zYYMPGz919MSX1KuvAcycIuS0ci150HCoPf4XQVhQ84Qf8xRPWxFaQ==}
+    engines: {node: '>= 7.6.0'}
 
   koa@2.15.3:
     resolution: {integrity: sha512-j/8tY9j5t+GVMLeioLaxweJiKUayFhlGqNTzf2ZGwL0ZCQijd2RLHK0SLW5Tsko8YyyqCZC2cojIb0/s62qTAg==}
@@ -996,6 +1031,10 @@ packages:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
 
+  path-is-absolute@1.0.1:
+    resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
+    engines: {node: '>=0.10.0'}
+
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
@@ -1054,6 +1093,10 @@ packages:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
 
+  resolve-path@1.4.0:
+    resolution: {integrity: sha512-i1xevIst/Qa+nA9olDxLWnLk8YZbi8R/7JPbCMcgyWaFR6bKWaexgJgEB5oc2PKMjYdrHynyz0NY+if+H98t1w==}
+    engines: {node: '>= 0.8'}
+
   reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
@@ -1083,6 +1126,9 @@ packages:
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
+
+  setprototypeof@1.1.0:
+    resolution: {integrity: sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==}
 
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
@@ -1423,6 +1469,15 @@ snapshots:
     dependencies:
       '@types/koa': 2.15.0
 
+  '@types/koa-send@4.1.6':
+    dependencies:
+      '@types/koa': 2.15.0
+
+  '@types/koa-static@4.0.4':
+    dependencies:
+      '@types/koa': 2.15.0
+      '@types/koa-send': 4.1.6
+
   '@types/koa@2.15.0':
     dependencies:
       '@types/accepts': 1.3.7
@@ -1684,6 +1739,10 @@ snapshots:
       which: 2.0.2
 
   date-format@4.0.14: {}
+
+  debug@3.2.7:
+    dependencies:
+      ms: 2.1.3
 
   debug@4.3.7(supports-color@5.5.0):
     dependencies:
@@ -1953,6 +2012,13 @@ snapshots:
       deep-equal: 1.0.1
       http-errors: 1.8.1
 
+  http-errors@1.6.3:
+    dependencies:
+      depd: 1.1.2
+      inherits: 2.0.3
+      setprototypeof: 1.1.0
+      statuses: 1.5.0
+
   http-errors@1.8.1:
     dependencies:
       depd: 1.1.2
@@ -1985,6 +2051,8 @@ snapshots:
   imurmurhash@0.1.4: {}
 
   inflation@2.1.0: {}
+
+  inherits@2.0.3: {}
 
   inherits@2.0.4: {}
 
@@ -2088,6 +2156,21 @@ snapshots:
       http-errors: 2.0.0
       koa-compose: 4.1.0
       path-to-regexp: 8.1.0
+
+  koa-send@5.0.1:
+    dependencies:
+      debug: 4.3.7(supports-color@5.5.0)
+      http-errors: 1.8.1
+      resolve-path: 1.4.0
+    transitivePeerDependencies:
+      - supports-color
+
+  koa-static@5.0.0:
+    dependencies:
+      debug: 3.2.7
+      koa-send: 5.0.1
+    transitivePeerDependencies:
+      - supports-color
 
   koa@2.15.3:
     dependencies:
@@ -2243,6 +2326,8 @@ snapshots:
 
   path-exists@4.0.0: {}
 
+  path-is-absolute@1.0.1: {}
+
   path-key@3.1.1: {}
 
   path-scurry@2.0.0:
@@ -2287,6 +2372,11 @@ snapshots:
 
   resolve-from@4.0.0: {}
 
+  resolve-path@1.4.0:
+    dependencies:
+      http-errors: 1.6.3
+      path-is-absolute: 1.0.1
+
   reusify@1.0.4: {}
 
   rfdc@1.4.1: {}
@@ -2314,6 +2404,8 @@ snapshots:
       get-intrinsic: 1.2.4
       gopd: 1.0.1
       has-property-descriptors: 1.0.2
+
+  setprototypeof@1.1.0: {}
 
   setprototypeof@1.2.0: {}
 

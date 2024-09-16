@@ -16,11 +16,20 @@ declare global {
 }
 
 interface MyCustomProcessEnv {
+    /** 默认端口 */
     BASE_PORT?: number;
+    /** 环境名称 */
     NODE_ENV?: string;
+    /** jwt 私钥 */
     JWT_PRIVATE_KEY?: string;
+    /** jwt 公钥 */
     JWT_PUBLIC_KEY?: string;
+    /** 管理员用户名 */
     ADMIN_USER_NAME?: string;
+    /** 管理员密码 */
     ADMIN_USER_PASSWORD?: string;
+    /** 管理员盐值 */
     ADMIN_USER_SALT?: string;
+    /** 静态文件目录 */
+    STATIC_FOLDER: string;
 }
