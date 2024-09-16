@@ -5,5 +5,5 @@ import { defaultStatic } from "./static";
 export function defaultApi(app: Application) {
     defaultGlobal();
     defaultUser();
-    defaultStatic();
+    defaultStatic(app);
 }

@@ -1,7 +1,7 @@
 import { logger } from "../logger";
 import { AppError } from "./modules/appError";
 
-export function useErrorHandle(app: Application) {
+export function handleError(app: Application) {
     app.use(async (ctx, next) => {
         try {
             await next();
