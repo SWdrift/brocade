@@ -1,9 +1,9 @@
 import Joi from "joi";
-import { apiRouter } from "../../../router/index";
-import { verifyBodyRequest } from "../../../public/validator";
-import { verifyToken, encodeToken } from "../../../public/jwt";
-import { ISchema } from "../../../public/validator/types";
-import { createAppError } from "../../../public/error/modules/appError";
+import { apiRouter } from "../../router/index";
+import { verifyBodyRequest } from "../../public/validator";
+import { verifyToken, encodeToken } from "../../public/jwt";
+import { ISchema } from "../../public/validator/types";
+import { createAppError } from "../../public/error/modules/appError";
 
 function defaultUserSaltGet() {
     interface RequestUserSaltGet {
@@ -18,7 +18,7 @@ function defaultUserSaltGet() {
         puzzling: Joi.boolean().default(false)
     });
     apiRouter.post(
-        "/user/salt/get",
+        "/app/user/salt/get",
         verifyBodyRequest(schemaUserSaltGet),
         (ctx: BodyContext<RequestUserSaltGet>) => {
             const salt = getSalt(ctx.state.validatedData);
@@ -56,7 +56,7 @@ function defaultUserLogin() {
         puzzling: Joi.boolean().default(false)
     });
     apiRouter.post(
-        "/user/login",
+        "/app/user/login",
         verifyBodyRequest(schemaUserLogin),
         async (ctx: BodyContext<RequestUserLogin>) => {
             verifyPassword(ctx.state.validatedData);
@@ -83,7 +83,7 @@ function defaultUserLogin() {
 }
 
 function defaultUserTokenTest() {
-    apiRouter.post("/user/token/test", verifyToken, (ctx) => {
+    apiRouter.post("/app/user/token/test", verifyToken, (ctx) => {
         const data = ctx.state;
         ctx.body = data;
     });

@@ -1,7 +1,11 @@
 import mount from "koa-mount";
+import Joi from "joi";
 import { apiRouter } from "../../../router";
+import { verifyToken } from "../../../public/jwt";
 import { getStaticServer } from "./service/staticServer";
+import { verifyParamsRequest } from "../../../public/validator";
 import { generateDirHTML, generateDirJson } from "./service/dirGenerator";
+import type { ISchema } from "../../../public/validator/types";
 
 function defaultStaticFile(app: Application) {
     const staticServer = getStaticServer();
@@ -30,7 +34,18 @@ function defaultStaticFile(app: Application) {
 }
 
 function defaultStaticUpload() {
-    apiRouter.post("/static/upload", async (ctx, next) => {});
+    interface RequestStaticUpload {
+        path: string;
+    }
+    const scehamStaticUpload: ISchema<RequestStaticUpload> = Joi.object({
+        path: Joi.string().required()
+    });
+    apiRouter.post(
+        "/static/upload",
+        verifyToken,
+        verifyParamsRequest(scehamStaticUpload),
+        async (ctx, next) => {}
+    );
 }
 
 function defaultStaticDelete() {}

@@ -1,2 +1,2 @@
-export { verifyBodyRequest as verifyRequest } from "./local";
+export { verifyBodyRequest, verifyParamsRequest } from "./local";
 export { verifyGlobalRequest } from "./global";
