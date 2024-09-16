@@ -17,8 +17,12 @@ export async function generateDirHTML(url: string, urlPrefix: string) {
         return contentList;
     }
 
-    let html = ``;
-    for (let [_index, item] of contentList.entries()) {
+    let html = `<span>folder:</span><br/>`;
+    for (let item of contentList.dirList) {
+        html = `${html}<a href="${getItemReqUrl(url, item)}">${item}</a><br/>`;
+    }
+    html = `${html}<span>file:</span><br/>`;
+    for (let item of contentList.fileList) {
         html = `${html}<a href="${getItemReqUrl(url, item)}">${item}</a><br/>`;
     }
 
@@ -42,11 +46,17 @@ export async function generateDirJson(url: string, urlPrefix: string) {
     }
 
     const json: {
-        content: { fileName: string; fileUrl: string }[];
+        content: (
+            | { fileName: string; fileUrl: string }
+            | { folderName: string; folderUrl: string }
+        )[];
     } = {
         content: []
     };
-    for (let [_index, item] of contentList.entries()) {
+    for (let item of contentList.dirList) {
+        json.content.push({ folderName: item, folderUrl: getItemReqUrl(url, item) });
+    }
+    for (let item of contentList.fileList) {
         json.content.push({ fileName: item, fileUrl: getItemReqUrl(url, item) });
     }
 

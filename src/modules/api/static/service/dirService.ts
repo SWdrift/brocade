@@ -33,7 +33,7 @@ const MIMES: Record<string, string> = {
  * @return 目录内容列表
  */
 export async function getDirContent(reqPath: string) {
-    if (!await isDirectory(reqPath)) {
+    if (!(await isDirectory(reqPath))) {
         return getFileContent(reqPath);
     }
 
@@ -53,9 +53,7 @@ export async function getDirContent(reqPath: string) {
         }
     }
 
-    let result = dirList.concat(fileList);
-
-    return result;
+    return { dirList, fileList };
 }
 
 async function isDirectory(reqPath: string): Promise<boolean> {
