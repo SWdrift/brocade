@@ -16,8 +16,10 @@ declare global {
 }
 
 interface MyCustomProcessEnv {
-    /** 默认端口 */
-    BASE_PORT?: number;
+    /** API 前缀 */
+    API_PREFIX?: string;
+    /** API 端口 */
+    API_PORT?: number;
     /** 环境名称 */
     NODE_ENV?: string;
     /** jwt 私钥 */
@@ -31,7 +33,7 @@ interface MyCustomProcessEnv {
     /** 管理员盐值 */
     ADMIN_USER_SALT?: string;
     /** 静态文件目录 */
-    STATIC_FOLDER: string;
+    STATIC_FOLDER?: string;
     /** 静态文件路径 */
-    STATIC_PATH: string;
+    STATIC_PATH?: string;
 }

@@ -1,7 +1,7 @@
-import { router } from "../../router/index";
+import { apiRouter } from "../../router/index";
 
 export function defaultGlobal() {
-    router.get("/", (ctx, next) => {
+    apiRouter.get("/", (ctx, next) => {
         ctx.body = "Hello World";
     });
 }

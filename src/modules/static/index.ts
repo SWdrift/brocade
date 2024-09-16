@@ -1,4 +1,4 @@
-import { router } from "../../router/index";
+import { apiRouter } from "../../router/index";
 
 function defaultStaticPathGet() {}
 

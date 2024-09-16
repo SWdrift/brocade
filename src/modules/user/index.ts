@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { router } from "../../router/index";
+import { apiRouter } from "../../router/index";
 import { verifyRequest } from "../../public/validator";
 import { verifyToken, encodeToken } from "../../public/jwt";
 import { ISchema } from "../../public/validator/types";
@@ -17,7 +17,7 @@ function defaultUserSaltGet() {
         username: Joi.string().min(3).max(64).required(),
         puzzling: Joi.boolean().default(false)
     });
-    router.post(
+    apiRouter.post(
         "/app/user/salt/get",
         verifyRequest(schemaUserSaltGet),
         (ctx: Context<RequestUserSaltGet>) => {
@@ -55,7 +55,7 @@ function defaultUserLogin() {
         salt: Joi.string().min(3).max(64).required(),
         puzzling: Joi.boolean().default(false)
     });
-    router.post(
+    apiRouter.post(
         "/app/user/login",
         verifyRequest(schemaUserLogin),
         (ctx: Context<RequestUserLogin>) => {
@@ -83,7 +83,7 @@ function defaultUserLogin() {
 }
 
 function defaultUserTokenTest() {
-    router.post("/app/user/token/test", verifyToken, (ctx) => {
+    apiRouter.post("/app/user/token/test", verifyToken, (ctx) => {
         const data = ctx.state;
         ctx.body = data;
     });
