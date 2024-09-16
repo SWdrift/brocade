@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 temp/*
+.VSCodeCounter
 
 # Editor directories and files
 .vscode/*
