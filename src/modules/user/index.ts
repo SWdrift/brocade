@@ -89,7 +89,7 @@ function defaultUserTokenTest() {
     });
 }
 
-export function useUser() {
+export function defaultUser() {
     defaultUserSaltGet();
     defaultUserLogin();
     defaultUserTokenTest();
