@@ -6,7 +6,7 @@ import { CONFIG } from "./config";
  * 全局验证器
  */
 export function verifyGlobalRequest(app: Application) {
-    app.use(async (ctx: Context<any>, next: Next) => {
+    app.use(async (ctx: BodyContext<any>, next: Next) => {
         const apiPrefix = process.env.API_PREFIX;
         if (!apiPrefix) {
             throw logger.error("API_PREFIX is not defined in environment variables.");
@@ -25,7 +25,7 @@ export function verifyGlobalRequest(app: Application) {
     });
 }
 
-function verifyApiRequest(ctx: Context<any>) {
+function verifyApiRequest(ctx: BodyContext<any>) {
     if (ctx.request.url.length > CONFIG.MAX_URL_LENGTH) {
         throw createAppError("Request URL is too long", 414);
     }

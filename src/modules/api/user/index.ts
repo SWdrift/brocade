@@ -20,7 +20,7 @@ function defaultUserSaltGet() {
     apiRouter.post(
         "/user/salt/get",
         verifyRequest(schemaUserSaltGet),
-        (ctx: Context<RequestUserSaltGet>) => {
+        (ctx: BodyContext<RequestUserSaltGet>) => {
             const salt = getSalt(ctx.state.validatedData);
             const response: ResponseUserSaltGet = { salt };
             ctx.body = response;
@@ -58,7 +58,7 @@ function defaultUserLogin() {
     apiRouter.post(
         "/user/login",
         verifyRequest(schemaUserLogin),
-        async (ctx: Context<RequestUserLogin>) => {
+        async (ctx: BodyContext<RequestUserLogin>) => {
             verifyPassword(ctx.state.validatedData);
             const { username } = ctx.state.validatedData;
             const token = await encodeToken({ username });

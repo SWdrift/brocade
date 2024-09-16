@@ -11,7 +11,7 @@ function defaultStaticFile(app: Application) {
     app.use(mount(url, staticServer));
     app.use(responseDirPage);
 
-    async function responseDirPage(ctx: Context<any>, next: Next) {
+    async function responseDirPage(ctx: BodyContext<any>, next: Next) {
         if (ctx.path.startsWith(url)) {
             ctx.body = await generateDirPage(ctx);
             await next();
@@ -20,7 +20,7 @@ function defaultStaticFile(app: Application) {
         }
     }
 
-    async function generateDirPage(ctx: Context<any>) {
+    async function generateDirPage(ctx: BodyContext<any>) {
         if (ctx.method === "POST") {
             return await generateDirJson(ctx.url, url);
         } else {

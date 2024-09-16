@@ -5,7 +5,7 @@ import { encodeToken } from "./encode";
 export { decodeToken };
 export { encodeToken };
 
-export async function verifyToken(ctx: Context<unknown>, next: Next) {
+export async function verifyToken(ctx: BodyContext<unknown>, next: Next) {
     const authorizationHeader = ctx.headers["authorization"];
 
     if (!authorizationHeader) {
