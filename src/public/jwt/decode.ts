@@ -6,7 +6,7 @@ import { CONFIG } from "./config";
  * @param token 要验证的 jwt token
  * @returns 解密后的 jwt 数据
  */
-export function decodeToken(token: string): Token {
+export async function decodeToken(token: string): Promise<Token> {
     try {
         if (["RS256", "RS384", "RS512"].includes(CONFIG.ALGORITHM)) {
             // 非对称加密

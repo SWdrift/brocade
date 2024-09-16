@@ -5,7 +5,7 @@ import { encodeToken } from "./encode";
 export { decodeToken };
 export { encodeToken };
 
-export function verifyToken(ctx: Context<unknown>, next: Next) {
+export async function verifyToken(ctx: Context<unknown>, next: Next) {
     const authorizationHeader = ctx.headers["authorization"];
 
     if (!authorizationHeader) {
@@ -18,7 +18,7 @@ export function verifyToken(ctx: Context<unknown>, next: Next) {
     }
 
     try {
-        const data = decodeToken(token);
+        const data = await decodeToken(token);
         ctx.state.token = data;
         return next();
     } catch (error) {

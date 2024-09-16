@@ -18,7 +18,7 @@ function defaultUserSaltGet() {
         puzzling: Joi.boolean().default(false)
     });
     apiRouter.post(
-        "/app/user/salt/get",
+        "/user/salt/get",
         verifyRequest(schemaUserSaltGet),
         (ctx: Context<RequestUserSaltGet>) => {
             const salt = getSalt(ctx.state.validatedData);
@@ -56,12 +56,12 @@ function defaultUserLogin() {
         puzzling: Joi.boolean().default(false)
     });
     apiRouter.post(
-        "/app/user/login",
+        "/user/login",
         verifyRequest(schemaUserLogin),
-        (ctx: Context<RequestUserLogin>) => {
+        async (ctx: Context<RequestUserLogin>) => {
             verifyPassword(ctx.state.validatedData);
             const { username } = ctx.state.validatedData;
-            const token = encodeToken({ username });
+            const token = await encodeToken({ username });
             const response: ResponseUserLogin = { username, token };
             ctx.body = response;
         }
@@ -83,7 +83,7 @@ function defaultUserLogin() {
 }
 
 function defaultUserTokenTest() {
-    apiRouter.post("/app/user/token/test", verifyToken, (ctx) => {
+    apiRouter.post("/user/token/test", verifyToken, (ctx) => {
         const data = ctx.state;
         ctx.body = data;
     });

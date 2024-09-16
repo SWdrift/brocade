@@ -29,7 +29,9 @@ function defaultStaticFile(app: Application) {
     }
 }
 
-function defaultStaticUpload() {}
+function defaultStaticUpload() {
+    apiRouter.post("/static/upload", async (ctx, next) => {});
+}
 
 function defaultStaticDelete() {}
 
