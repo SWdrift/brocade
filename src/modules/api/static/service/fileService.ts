@@ -41,13 +41,37 @@ export async function saveFile(files: File | File[], path?: string) {
         return;
     }
     const newPath = getNewPath(p);
+    if (!await veifyFileFolder(newPath)) {
+        throw createAppError("invalid file folder");
+    }
     await fs.promises.rename(oldPath, newPath);
 }
 
 function veifyFilePath(path?: string) {
+    if (!path) {
+        return false;
+    }
+    const regex = /^(?!.*\.\.)[^./][\w./-]*[^./]\.[a-zA-Z0-9]+$/;
+    if (!regex.test(path)) {
+        return false;
+    }
+    return true;
+}
+
+async function veifyFileFolder(path: string) {
+    const folder = getFileFolder(path);
+    const exists = await fs.promises.stat(folder).catch(() => false);
+    if (!exists) {
+        await fs.promises.mkdir(folder, { recursive: true });
+    }
     return true;
 }
 
 function getNewPath(path: string) {
     return ROOT_PATH + "/" + getEnv(EnvEnum.STATIC_FOLDER) + "/" + path;
+}
+
+function getFileFolder(path: string) {
+    const parts = path.split("/");
+    return parts.slice(0, parts.length - 1).join("/");
 }
