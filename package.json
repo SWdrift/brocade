@@ -1,5 +1,5 @@
 {
-    "name": "tapestry",
+    "name": "brocade",
     "version": "0.0.0",
     "scripts": {
         "dev": "dotenv -e .env.development -c development nodemon --watch src -e ts,tsx --exec ts-node src/index.ts",
