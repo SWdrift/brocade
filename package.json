@@ -5,7 +5,7 @@
         "dev": "dotenv -e .env.development -c development nodemon --watch src -e ts,tsx --exec ts-node src/index.ts",
         "pre": "dotenv -e .env.development -c development node ./dist/index.js",
         "start": "dotenv -e .env.production -c production node ./dist/index.js",
-        "clean": "rimraf dist",
+        "clean": "rimraf dist temp",
         "build": "pnpm clean && ncc build ./src/index.ts -o ./dist -m"
     },
     "dependencies": {
@@ -19,7 +19,8 @@
         "koa-mount": "^4.0.0",
         "koa-router": "^13.0.1",
         "koa-static": "^5.0.0",
-        "log4js": "^6.9.1"
+        "log4js": "^6.9.1",
+        "simple-git": "^3.26.0"
     },
     "devDependencies": {
         "@types/jsonwebtoken": "^9.0.6",
