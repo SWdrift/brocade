@@ -3,7 +3,7 @@ import Joi from "joi";
 import { apiRouter } from "../../../router";
 import { verifyToken } from "../../../public/jwt";
 import { getStaticServer } from "./service/staticServer";
-import { verifyParamsRequest } from "../../../public/validator";
+import { verifyBodyRequest, verifyParamsRequest } from "../../../public/validator";
 import { createAppError } from "../../../public/error/modules/appError";
 import { generateDirHTML, generateDirJson } from "./service/dirGenerator";
 import { getEnv, EnvEnum } from "../../../public/env";
@@ -101,11 +101,55 @@ function defaultStaticUpload() {
     );
 }
 
-function defaultStaticDelete() {}
+function defaultStaticDelete() {
+    interface RequestStaticDelete {
+        path: string;
+    }
+    const scehamStaticDelete: ISchema<RequestStaticDelete> = Joi.object({
+        path: Joi.string().required()
+    });
+    apiRouter.post(
+        "/static/delete",
+        verifyToken,
+        verifyBodyRequest(scehamStaticDelete),
+        async (ctx: BodyContext<RequestStaticDelete>, next) => {
+            const path = ctx.state.validatedBody.path;
+            await saveFile(null, path, true);
+            ctx.body = createSuccessResponse();
+            await next();
+        }
+    );
+}
 
-function defaultStaticUpdate() {}
+function defaultStaticUpdate() {
+    interface RequestStaticUpdate {
+        path: string;
+    }
+    const scehamStaticUpdate: ISchema<RequestStaticUpdate> = Joi.object({
+        path: Joi.string().required()
+    });
+    apiRouter.post(
+        "/static/update",
+        verifyToken,
+        verifyParamsRequest(scehamStaticUpdate),
+        async (ctx: ParamContext<RequestStaticUpdate>, next) => {
+            if (!ctx.request.files?.files) {
+                throw createAppError("No file uploaded");
+            }
+            const path = ctx.state.validatedParam.path;
+            if (Array.isArray(ctx.request.files.files)) {
+                throw createAppError("Only one file can be uploaded");
+            }
+            await saveFile(ctx.request.files.files, path, true);
+            ctx.body = createSuccessResponse();
+            await next();
+        }
+    );
+}
 
 export function defaultStatic(app: Application) {
     defaultStaticFile(app);
     defaultStaticUpload();
+    defaultStaticUpdate();
+    defaultStaticDelete();
 }

@@ -24,15 +24,23 @@ export async function saveFiles(files: File | File[]) {
     }
 }
 
-export async function saveFile(files: File, path?: string) {
+export async function saveFile(file: File | null, path?: string, cover?: boolean) {
     veifyFilePath(path);
 
-    const f = files as File;
+    if (!file) {
+        if (!path) {
+            throw createAppError("file or path is required");
+        }
+        const newPath = getNewPath(path);
+        return await deleteFile(newPath);
+    }
+
+    const f = file as File;
     const { filepath: oldPath } = f;
     const p = path || oldPath;
     const newPath = getNewPath(p);
 
-    if (await fs.promises.stat(newPath).catch(() => false)) {
+    if ((await hasFile(newPath)) && !cover) {
         if (newPath !== oldPath) {
             throw createAppError(`file ${p} already exists, please choose another name`);
         }
@@ -40,7 +48,7 @@ export async function saveFile(files: File, path?: string) {
     }
 
     await veifyFolderPath(getFileFolder(newPath));
-    await fs.promises.rename(oldPath, newPath);
+    await moveFile(oldPath, newPath);
 }
 
 export async function veifyFolderPath(path: string) {
@@ -70,4 +78,17 @@ function getNewPath(path: string) {
 function getFileFolder(path: string) {
     const parts = path.split("/");
     return parts.slice(0, parts.length - 1).join("/");
+}
+
+async function hasFile(path: string) {
+    const exists = await fs.promises.stat(path).catch(() => false);
+    return exists;
+}
+
+async function moveFile(oldPath: string, newPath: string) {
+    await fs.promises.rename(oldPath, newPath);
+}
+
+async function deleteFile(path: string) {
+    await fs.promises.unlink(path);
 }
